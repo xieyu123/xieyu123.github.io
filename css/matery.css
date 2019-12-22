@@ -2125,6 +2125,10 @@ footer .copy-right {
     padding: 0px;
     margin: 0px;
 }
+/*设置因安装live2d插件导致 不蒜子计数不可见*/
 #busuanzi_container_site_pv{
+    display: inline !important;
+}
+#busuanzi_container_site_uv{
     display: inline !important;
 }
