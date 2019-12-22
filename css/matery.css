@@ -2125,3 +2125,6 @@ footer .copy-right {
     padding: 0px;
     margin: 0px;
 }
+#busuanzi_container_site_pv{
+    display: inline !important;
+}
