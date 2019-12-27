@@ -355,19 +355,19 @@
                 
                 
                 
-                <a href="/categories/%E6%8A%80%E6%9C%AF/" title="技术: 1">
+                <a href="/categories/HTML/" title="HTML: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">技术
+                             chip-active "
+                            style="background-color: #F9EBEA;">HTML
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/HTML/" title="HTML: 1">
+                <a href="/categories/%E6%8A%80%E6%9C%AF/" title="技术: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F5EEF8;">HTML
+                             chip-default "
+                            style="background-color: #F5EEF8;">技术
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -498,11 +498,11 @@
                         diffMinutes * minutes) / seconds);
                     if (startYear == todayYear) {
                         document.getElementById("year").innerHTML = todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                        document.getElementById("sitetime").innerHTML = "本站已侥幸存活 " + diffDays + " 天 " + diffHours +
                             " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                     } else {
                         document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                        document.getElementById("sitetime").innerHTML = "本站已侥幸存活 " + diffYears + " 年 " + diffDays +
                             " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                     }
                 }
@@ -637,6 +637,19 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+    <script>
+        $(function(){
+            $('.cherry').Cherry_Blossoms({
+                is_Cherry:true,//是否生成樱花
+                image_min:10,//花瓣最小宽度和高度
+                image_max:50,//花瓣最大宽度和高度
+                time_min:10000,//花瓣最快下坠时间
+                time_max:20000,//花瓣最慢下坠时间
+                interval:500//花瓣生成时间间隔
+            })
+        })
+    </script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
