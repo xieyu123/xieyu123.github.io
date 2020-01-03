@@ -488,6 +488,41 @@
                     
 
                     
+                        
+
+<link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<div class="music-player">
+    
+    <div class="title center-align">
+        <i class="fas fa-music"></i>&nbsp;&nbsp;听听音乐
+    </div>
+    
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s12">
+            <div id="aplayer" class="music"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script>
+$(function () {
+    new APlayer({
+        container: document.getElementById('aplayer'),
+        fixed: 'false' === 'true',
+        autoplay: 'false' === 'true',
+        theme: '#42b983',
+        loop: 'all',
+        order: 'list',
+        preload: 'auto',
+        volume: Number('0.7'),
+        listFolded: 'false' === 'true',
+        listMaxHeight: '',
+        audio: eval([{"name":"手紙 ~拝啓 十五の君へ~","artist":"アンジェラ・アキ","url":"https://m801.music.126.net/20200103104116/3a083a04a4fe160799e43d1d2613beff/jdyyaac/030f/0552/565b/4ec7f6505428be8715a3a1d7b40942e2.m4a","cover":"http://p1.music.126.net/xx6whLX3VOKmtKzYxHfrSw==/109951163251450922.jpg"}])
+    });
+});
+</script>
+                    
 
                     
 
