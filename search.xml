@@ -8,7 +8,7 @@
       <link href="/2019/01/25/sql-cha-xun-huo-de-zhi-ding-ge-shi-nei-rong/"/>
       <url>/2019/01/25/sql-cha-xun-huo-de-zhi-ding-ge-shi-nei-rong/</url>
       
-        <content type="html"><![CDATA[<p>Oracle中通过修改SQL语句,达到将查询的内容拼接为指定的字符串格式</p><p>eg:</p><p>select ‘&lt;ta:datagridItem id=”‘ || lower(column_name) || ‘“ key=”‘ || comments ||<br>‘“ align=”center” dataAlign=”center” width=”40” showDetailed=”true” /&gt;’<br>from user_col_comments<br>where Table_Name = ‘T_WX_APPOINTMENT’      —–表名一定要与数据库中一致,大小写敏感,特别是Oracle中表名创建通常会被默认设置为全大写</p>]]></content>
+        <content type="html"><![CDATA[<p>Oracle中通过修改SQL语句,达到将查询的内容拼接为指定的字符串格式</p><p>eg:</p><pre><code>select &#39;&lt;ta:datagridItem id=&quot;&#39; || lower(column_name) || &#39;&quot; key=&quot;&#39; || comments ||&#39;&quot; align=&quot;center&quot; dataAlign=&quot;center&quot; width=&quot;40&quot; showDetailed=&quot;true&quot; /&gt;&#39;from user_col_commentswhere Table_Name = &#39;T_WX_APPOINTMENT&#39; </code></pre><p>—–表名一定要与数据库中一致,大小写敏感,特别是Oracle中表名创建通常会被默认设置为全大写</p>]]></content>
       
       
       <categories>
