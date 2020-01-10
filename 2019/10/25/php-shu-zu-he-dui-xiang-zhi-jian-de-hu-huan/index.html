@@ -4,13 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Integer a= 127 与 Integer b = 128相关, xieyu,github">
-    <meta name="description" content="Integer a = 127;
-Integer b = 127;
-Integer c = 128;
-Integer d = 128;
-a == b 与 c == d 的比较结果是什么？
-a == b 的结果为true 而 c == d的结">
+    <meta name="keywords" content="PHP数组和对象之间的互换, xieyu,github">
+    <meta name="description" content="今天在和前端对接接口的时候，从后台返回数据给前端的时候出现如下JSON格式数据
+&amp;quot;goods&amp;quot;: [
+            {
+                &amp;quot;id&amp;quot;: &amp;quot;dEQ1448">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +16,7 @@ a == b 的结果为true 而 c == d的结">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Integer a= 127 与 Integer b = 128相关 | xieyu</title>
+    <title>PHP数组和对象之间的互换 | xieyu</title>
     <link rel="icon" type="image/png" href="/head_icon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +307,12 @@ a == b 的结果为true 而 c == d的结">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Integer a= 127 与 Integer b = 128相关</h1>
+                    <h1 class="description center-align post-title">PHP数组和对象之间的互换</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +429,8 @@ a == b 的结果为true 而 c == d的结">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JAVA/">
-                                <span class="chip bg-color">JAVA</span>
+                            <a href="/tags/PHP/">
+                                <span class="chip bg-color">PHP</span>
                             </a>
                         
                     </div>
@@ -456,7 +454,7 @@ a == b 的结果为true 而 c == d的结">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-01-18
+                    2019-10-25
                 </div>
                 
 
@@ -465,14 +463,14 @@ a == b 的结果为true 而 c == d的结">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    723
+                    400
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 				
@@ -483,30 +481,78 @@ a == b 的结果为true 而 c == d的结">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Integer a = 127;</p>
-<p>Integer b = 127;</p>
-<p>Integer c = 128;</p>
-<p>Integer d = 128;</p>
-<p>a == b 与 c == d 的比较结果是什么？</p>
-<p>a == b 的结果为true 而 c == d的结果为false；</p>
-<p>为什么会出现结果？百度之后发现问题的根源所在，在解决这个问题之前，先说说常量池的概念，百度百科上有</p>
-<p>我再复述一遍。</p>
-<p><strong>Java常量池</strong></p>
-<p>常量池在java中用于保存编译期已经确定的，它包括了关于类，方法，接口中的常量，也包括字符串常量。例如<br>String s = “Java” 这种声明的方式。产生的这种”常量”就会被放到常量池，常量池是JVM的一块特殊的内存空间。<br>使用Java常量池技术，是为了方便快捷地创建某些对象，当你需要一个对象时候，就去这个池子里面找，找不到就在池子里面创建一个。但是必须注意 如果对象是用new 创建的。那么不管是什么对像，它是不会放到池子里的，而是向堆申请新的空间存储。<br>java中基本类型的包装类的大部分都实现了常量池技术，这些类是Byte,Short,Integer,Long,Character,Boolean,另外两种浮点数类型的包装类则没有实现。另外Byte,Short,Integer,Long,Character这5种整型的包装类也只是在对应值小于等于127时才可使用对象池。超过了就要申请空间创建对象了<br>”==“ 我们知道比较的是引用的地址(其实java不要允许用户直接对内存进行操作的的)。</p>
-<p>当我们使用Integer a = 127 的时候 实际上调用的是下面这个方法：</p>
-<pre><code> public static Integer valueOf(int i) {
-        assert IntegerCache.high &gt;= 127;
-        if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
-            return IntegerCache.cache[i + (-IntegerCache.low)];
-        return new Integer(i);
-     }</code></pre><p>这个方法的首先断言了IntegerCache.high的值大于等于127（关于这里assert 大于等于127解释请看补充），否则退出方法。<br>接着if条件内i需要在low值和high值之间。<br><img src="https://img2018.cnblogs.com/blog/1576408/201901/1576408-20190118135102458-1002051114.jpg" alt=""></p>
-<p>可以看到low为-128，即if条件需要i在-128和127之间，那么返回i+128作为整型数组 cache的下标，用来放在缓存中。这样也就是说任意一个相同数值的Integer的数，如果在-128和127之间，那么它们之间的内存地址是相同的。<br>这也就解释了为什么Integer a=127,b=127时候a==b返回true。<br>而如果if条件不满足则返回new Integer(i)。<br>即如果 数在 -128到127之间 就返回池子中的对象。没有的话就创建</p>
-<hr>
-<p>其实如果问题是这样的话<br>Integer a = new Integer(127);</p>
-<p>Integer b = new Integer(127);</p>
-<p>Integer c = 128;</p>
-<p>Integer d = 128;</p>
-<p>a == b 一定为false 因为 没有去找常量池，a，b都是在堆中申请了空间 返回的引用肯定不一样。</p>
+                <p>今天在和前端对接接口的时候，从后台返回数据给前端的时候出现如下JSON格式数据</p>
+<pre><code>&quot;goods&quot;: [
+            {
+                &quot;id&quot;: &quot;dEQ144800584Lx&quot;,
+                &quot;ico&quot;: &quot;img/goodsIco/HRg144800864lp.jpg&quot;
+            },
+            {
+                &quot;id&quot;: &quot;dhD144800584BJ&quot;,
+                &quot;ico&quot;: &quot;&quot;
+            },
+            {
+                &quot;id&quot;: &quot;oho144800584BB&quot;,
+                &quot;ico&quot;: &quot;&quot;
+            },
+            {
+                &quot;id&quot;: &quot;sBr144800584fo&quot;,
+                &quot;ico&quot;: &quot;&quot;
+            },
+            {
+                &quot;id&quot;: &quot;WqD144800584YX&quot;,
+                &quot;ico&quot;: &quot;img/goodsIco/gDK144800869wI.jpg&quot;
+            }
+        ],
+</code></pre><p>说明该键值是以数组的形式传递，而前端需要goods对象，所以后台调试接口时候查询到几个方法，可以封装进项目里面，拿来即可使用，还是比较方便。</p>
+<pre><code>/**
+ * 数组 转 对象
+ *
+ * @param array $arr 数组
+ * @return object
+ */
+function array_to_object($arr) {
+    if (gettype($arr) != &#39;array&#39;) {
+        return;
+    }
+    foreach ($arr as $k =&gt; $v) {
+        if (gettype($v) == &#39;array&#39; || getType($v) == &#39;object&#39;) {
+            $arr[$k] = (object)array_to_object($v);
+        }
+    }
+
+    return (object)$arr;
+}</code></pre><pre><code>/**
+ * 对象 转 数组
+ *
+ * @param object $obj 对象
+ * @return array
+ */
+function object_to_array($obj) {
+    $obj = (array)$obj;
+    foreach ($obj as $k =&gt; $v) {
+        if (gettype($v) == &#39;resource&#39;) {
+            return;
+        }
+        if (gettype($v) == &#39;object&#39; || gettype($v) == &#39;array&#39;) {
+            $obj[$k] = (array)object_to_array($v);
+        }
+    }
+
+    return $obj;
+}</code></pre><p>经过转换后的JSON数据为一下形式：</p>
+<pre><code>&quot;goods&quot;: {
+            &quot;id&quot;: &quot;MbD144800562Xu&quot;,
+            &quot;name&quot;: &quot;登山杖&quot;,
+            &quot;ico&quot;: &quot;img/goodsIco/mmh144800859ld.jpg&quot;,
+            &quot;price&quot;: &quot;500.00&quot;,
+            &quot;soldPrice&quot;: &quot;400.00&quot;,
+            &quot;usercp&quot;: &quot;50&quot;,
+            &quot;time&quot;: &quot;2019-10-16 14:50:28&quot;,
+            &quot;payNum&quot;: 2
+        },</code></pre><hr>
+<p>之前也就在大学里面简单学过PHP，且目前才在新公司从事PHP开发几个月，还有很多需要学习的地方！在此简单记录一些学习内容<del>或许也记录不了几次o((⊙﹏⊙))o</del></p>
+<p><a href="https://blog.csdn.net/DickyQie/article/details/79235276" target="_blank" rel="noopener">参考链接</a></p>
 
             </div>
             <hr/>
@@ -532,7 +578,7 @@ a == b 的结果为true 而 c == d的结">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://xieyu.online/2019/01/18/integer-a-127-yu-integer-b-128-xiang-guan/">https://xieyu.online/2019/01/18/integer-a-127-yu-integer-b-128-xiang-guan/</a>
+                    <a href="https://xieyu.online/2019/10/25/php-shu-zu-he-dui-xiang-zhi-jian-de-hu-huan/">https://xieyu.online/2019/10/25/php-shu-zu-he-dui-xiang-zhi-jian-de-hu-huan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -570,8 +616,8 @@ a == b 的结果为true 而 c == d的结">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JAVA/">
-                                    <span class="chip bg-color">JAVA</span>
+                                <a href="/tags/PHP/">
+                                    <span class="chip bg-color">PHP</span>
                                 </a>
                             
                         </div>
@@ -634,9 +680,63 @@ a == b 的结果为true 而 c == d的结">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/10/25/php-shu-zu-he-dui-xiang-zhi-jian-de-hu-huan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="PHP数组和对象之间的互换">
+                        
+                        <span class="card-title">PHP数组和对象之间的互换</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            今天在和前端对接接口的时候，从后台返回数据给前端的时候出现如下JSON格式数据
+&quot;goods&quot;: [
+            {
+                &quot;id&quot;: &quot;dEQ1448
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2019/01/25/sql-cha-xun-huo-de-zhi-ding-ge-shi-nei-rong/">
                     <div class="card-image">
@@ -656,9 +756,9 @@ select &#39;&lt;ta:datagridItem id=&quot;&#39; || lower(column_name) || &#39;&q
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-01-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -680,56 +780,6 @@ select &#39;&lt;ta:datagridItem id=&quot;&#39; || lower(column_name) || &#39;&q
                     
                     <a href="/tags/Oracle/">
                         <span class="chip bg-color">Oracle</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/01/09/sql-you-hua-xiao-ji-qiao/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="SQL优化小技巧">
-                        
-                        <span class="card-title">SQL优化小技巧</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            我们要做到不但会写SQL，还要做到写出性能优良的SQL语句。
-1.使用表的别名(Alias)：当在SQL语句中连接多个表时, 请使用表的别名并把别名前缀于每个Column上。这样一来,就可以减少解析的时间并减少那些由Column歧义引起的语
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-09
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/SQL/">
-                        <span class="chip bg-color">SQL</span>
                     </a>
                     
                 </div>
