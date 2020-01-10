@@ -4,10 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SQL查询获得指定格式内容, xieyu,github">
-    <meta name="description" content="Oracle中通过修改SQL语句,达到将查询的内容拼接为指定的字符串格式
-eg:
-select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_name) || &amp;#39;&amp;q">
+    <meta name="keywords" content="SQL根据细粒度为天的查询, xieyu,github">
+    <meta name="description" content="当我们集成了一些前端框架，在某些展示页面上往往具有某些查询条件。而这其中日期查询的处理又较为麻烦，此处，我罗列了一种当前台上传了一种默认的date格式的日期查询数据至后台未经Controller或Service层处理直接在SQL中处理的一种">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +13,7 @@ select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_n
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SQL查询获得指定格式内容 | xieyu</title>
+    <title>SQL根据细粒度为天的查询 | xieyu</title>
     <link rel="icon" type="image/png" href="/head_icon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -306,12 +304,12 @@ select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_n
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SQL查询获得指定格式内容</h1>
+                    <h1 class="description center-align post-title">SQL根据细粒度为天的查询</h1>
                 </div>
             </div>
         </div>
@@ -432,10 +430,6 @@ select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_n
                                 <span class="chip bg-color">SQL</span>
                             </a>
                         
-                            <a href="/tags/Oracle/">
-                                <span class="chip bg-color">Oracle</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -457,7 +451,7 @@ select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_n
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-01-25
+                    2019-02-20
                 </div>
                 
 
@@ -466,7 +460,7 @@ select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_n
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    109
+                    422
                 </div>
                 
 
@@ -489,12 +483,30 @@ select &amp;#39;&amp;lt;ta:datagridItem id=&amp;quot;&amp;#39; || lower(column_n
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Oracle中通过修改SQL语句,达到将查询的内容拼接为指定的字符串格式</p>
-<p>eg:</p>
-<pre><code>select &#39;&lt;ta:datagridItem id=&quot;&#39; || lower(column_name) || &#39;&quot; key=&quot;&#39; || comments ||
-&#39;&quot; align=&quot;center&quot; dataAlign=&quot;center&quot; width=&quot;40&quot; showDetailed=&quot;true&quot; /&gt;&#39;
-from user_col_comments
-where Table_Name = &#39;T_WX_APPOINTMENT&#39; </code></pre><p>—–表名一定要与数据库中一致,大小写敏感,特别是Oracle中表名创建通常会被默认设置为全大写</p>
+                <p>当我们集成了一些前端框架，在某些展示页面上往往具有某些查询条件。而这其中日期查询的处理又较为麻烦，<br>此处，我罗列了一种当前台上传了一种默认的date格式的日期查询数据至后台未经Controller或Service层处理直接在SQL中处理的一种方式——即使用SQL的一些函数处理日期数据格式达到满足查询条件的目的</p>
+<p>注：此处的数据库使用的Oracle，使用的SQL也是针对Oracle，所以对于其他数据库的SQL查询可能会有一定的出入</p>
+<pre><code>SELECT a.id as id,
+a.orgid as orgid,
+a.deptid as deptid,
+a.doctorid as doctorid,
+a.evaluate as evaluate,
+a.note as note,
+to_char(a.note_date, &#39;yyyy-MM-dd&#39;) as note_date,
+a.business_type as business_type,
+a.business_note as business_note,
+a.evaluate_name as evaluate_name,
+a.evaluate_id as evaluate_id,
+a.effective as effective,
+a.bookingno as bookingno
+FROM hievaluate a
+WHERE 1 = 1
+AND substr(to_char(a.note_date,&#39;yyyy-mm-dd&#39;),0,10) = &#39;2018-11-22&#39;;</code></pre><p>其中的substr()函数可有可无，查询日期为2018-11-22的数据</p>
+<p>在ibatis中前台如若传入date格式的查询条件则需格式化查询数据</p>
+<p>Where子句后的查询条件更改为<br><code>to_char(a.create_date,&#39;yyyy-MM-dd&#39;) = to_char(#create_date:TIMESTAMP#, &#39;yyyy-MM-dd&#39;)</code><br>最后在ibatis中的完整格式为：</p>
+<pre><code>&lt;isNotEmpty prepend=&quot;AND&quot; property=&quot;create_date&quot;&gt; 
+      to_char(a.create_date,&lt;font color=red&gt;&#39;yyyy-MM-dd&#39;&lt;/font&gt;) = to_char(#create_date:TIMESTAMP#, &#39;yyyy-MM-dd&#39;)
+&lt;/isNotEmpty&gt;</code></pre><p>此处前台上传的数据格式为:  　　yyyy-MM-dd HH:mm:ss.S<br>               eg:         2018-11-23  00:00:00.0</p>
+<p>目前在实际项目中试用多种方法，暂时只有上面的格式正常运行</p>
 
             </div>
             <hr/>
@@ -520,7 +532,7 @@ where Table_Name = &#39;T_WX_APPOINTMENT&#39; </code></pre><p>—–表名一定
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://xieyu.online/2019/01/25/sql-cha-xun-huo-de-zhi-ding-ge-shi-nei-rong/">https://xieyu.online/2019/01/25/sql-cha-xun-huo-de-zhi-ding-ge-shi-nei-rong/</a>
+                    <a href="https://xieyu.online/2019/02/20/sql-gen-ju-xi-li-du-wei-tian-de-cha-xun/">https://xieyu.online/2019/02/20/sql-gen-ju-xi-li-du-wei-tian-de-cha-xun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -560,10 +572,6 @@ where Table_Name = &#39;T_WX_APPOINTMENT&#39; </code></pre><p>—–表名一定
                             
                                 <a href="/tags/SQL/">
                                     <span class="chip bg-color">SQL</span>
-                                </a>
-                            
-                                <a href="/tags/Oracle/">
-                                    <span class="chip bg-color">Oracle</span>
                                 </a>
                             
                         </div>
@@ -630,25 +638,79 @@ where Table_Name = &#39;T_WX_APPOINTMENT&#39; </code></pre><p>—–表名一定
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/02/20/sql-gen-ju-xi-li-du-wei-tian-de-cha-xun/">
+                <a href="/2019/10/25/php-shu-zu-he-dui-xiang-zhi-jian-de-hu-huan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="SQL根据细粒度为天的查询">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="PHP数组和对象之间的互换">
                         
-                        <span class="card-title">SQL根据细粒度为天的查询</span>
+                        <span class="card-title">PHP数组和对象之间的互换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            当我们集成了一些前端框架，在某些展示页面上往往具有某些查询条件。而这其中日期查询的处理又较为麻烦，此处，我罗列了一种当前台上传了一种默认的date格式的日期查询数据至后台未经Controller或Service层处理直接在SQL中处理的一种
+                            今天在和前端对接接口的时候，从后台返回数据给前端的时候出现如下JSON格式数据
+&quot;goods&quot;: [
+            {
+                &quot;id&quot;: &quot;dEQ1448
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-02-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-25
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PHP/">
+                        <span class="chip bg-color">PHP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/01/25/sql-cha-xun-huo-de-zhi-ding-ge-shi-nei-rong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="SQL查询获得指定格式内容">
+                        
+                        <span class="card-title">SQL查询获得指定格式内容</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Oracle中通过修改SQL语句,达到将查询的内容拼接为指定的字符串格式
+eg:
+select &#39;&lt;ta:datagridItem id=&quot;&#39; || lower(column_name) || &#39;&q
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -668,62 +730,8 @@ where Table_Name = &#39;T_WX_APPOINTMENT&#39; </code></pre><p>—–表名一定
                         <span class="chip bg-color">SQL</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/01/18/integer-a-127-yu-integer-b-128-xiang-guan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Integer a= 127 与 Integer b = 128相关">
-                        
-                        <span class="card-title">Integer a= 127 与 Integer b = 128相关</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-
-
-
-Integer a = 127;
-Integer b = 127;
-Integer c = 128;
-Integer d = 128;
-a == b 与 c == d 的比较结果是什么？
-a == b 的结果为true 而 c ==
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/JAVA/">
-                        <span class="chip bg-color">JAVA</span>
+                    <a href="/tags/Oracle/">
+                        <span class="chip bg-color">Oracle</span>
                     </a>
                     
                 </div>
