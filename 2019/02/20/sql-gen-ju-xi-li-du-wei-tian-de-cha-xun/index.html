@@ -460,7 +460,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    422
+                    414
                 </div>
                 
 
@@ -504,7 +504,7 @@ AND substr(to_char(a.note_date,&#39;yyyy-mm-dd&#39;),0,10) = &#39;2018-11-22&#39
 <p>在ibatis中前台如若传入date格式的查询条件则需格式化查询数据</p>
 <p>Where子句后的查询条件更改为<br><code>to_char(a.create_date,&#39;yyyy-MM-dd&#39;) = to_char(#create_date:TIMESTAMP#, &#39;yyyy-MM-dd&#39;)</code><br>最后在ibatis中的完整格式为：</p>
 <pre><code>&lt;isNotEmpty prepend=&quot;AND&quot; property=&quot;create_date&quot;&gt; 
-      to_char(a.create_date,&lt;font color=red&gt;&#39;yyyy-MM-dd&#39;&lt;/font&gt;) = to_char(#create_date:TIMESTAMP#, &#39;yyyy-MM-dd&#39;)
+      to_char(a.create_date,&#39;yyyy-MM-dd&#39;) = to_char(#create_date:TIMESTAMP#, &#39;yyyy-MM-dd&#39;)
 &lt;/isNotEmpty&gt;</code></pre><p>此处前台上传的数据格式为:  　　yyyy-MM-dd HH:mm:ss.S<br>               eg:         2018-11-23  00:00:00.0</p>
 <p>目前在实际项目中试用多种方法，暂时只有上面的格式正常运行</p>
 
