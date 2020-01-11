@@ -260,7 +260,7 @@ mark {
     color: #fff;
 }
 
-.progress-bar {
+.progress-bar {/*进度条CSS*/
     height: 4px;
     position: fixed;
     bottom: 0;
