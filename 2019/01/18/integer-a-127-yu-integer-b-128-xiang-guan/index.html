@@ -512,7 +512,7 @@ a == b 的结果为true 而 c ==">
         if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
             return IntegerCache.cache[i + (-IntegerCache.low)];
         return new Integer(i);
-     }</code></pre><p>这个方法的首先断言了IntegerCache.high的值大于等于127（关于这里assert 大于等于127解释请看补充），否则退出方法。<br>接着if条件内i需要在low值和high值之间。<br><img src="https://img2018.cnblogs.com/blog/1576408/201901/1576408-20190118135102458-1002051114.jpg" alt=""></p>
+     }</code></pre><p>这个方法的首先断言了IntegerCache.high的值大于等于127（关于这里assert 大于等于127解释请看补充），否则退出方法。<br>接着if条件内i需要在low值和high值之间。<br><img src="https://raw.githubusercontent.com/xieyu123/cloudImg/master/img/20200116194158.jpg" alt=""></p>
 <p>可以看到low为-128，即if条件需要i在-128和127之间，那么返回i+128作为整型数组 cache的下标，用来放在缓存中。这样也就是说任意一个相同数值的Integer的数，如果在-128和127之间，那么它们之间的内存地址是相同的。<br>这也就解释了为什么Integer a=127,b=127时候a==b返回true。<br>而如果if条件不满足则返回new Integer(i)。<br>即如果 数在 -128到127之间 就返回池子中的对象。没有的话就创建</p>
 <hr>
 <p>其实如果问题是这样的话<br>Integer a = new Integer(127);</p>
