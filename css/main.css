@@ -2710,8 +2710,6 @@ ul.breadcrumb li:last-child {
 .img-div-right {
   width: 40%;
   float: right;
-  position: relative;
-  overflow: hidden;
 }
 .img {
   width: 100%;
@@ -2724,16 +2722,4 @@ ul.breadcrumb li:last-child {
   box-sizing: border-box;
   padding: 30px 0 0 30px;
   font-size: 15px;
-}
-.class_cover {
-  width: 99%;
-  height: 20px;
-  line-height: 20px;
-  padding-left: 5px;
-  background-color: rgba(0,0,0,0.5);
-  color: #fff;
-  font-size: 10px;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
 }
