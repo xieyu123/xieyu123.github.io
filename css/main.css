@@ -2707,6 +2707,10 @@ ul.breadcrumb li:last-child {
   width: 40%;
   float: left;
 }
+.img-div-right {
+  width: 40%;
+  float: right;
+}
 .img {
   width: 100%;
 }
