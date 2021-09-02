@@ -2710,6 +2710,8 @@ ul.breadcrumb li:last-child {
 .img-div-right {
   width: 40%;
   float: right;
+  position: relative;
+  overflow: hidden;
 }
 .img {
   width: 100%;
